@@ -1,5 +1,6 @@
-// src/controllers/usuarioController.js
+//LISTAR USUARIO
 import prisma from '../config/prisma.js';
+import bcrypt from 'bcryptjs';
 
 export const listarUsuarios = async (req, res) => {
   try {
@@ -12,3 +13,40 @@ export const listarUsuarios = async (req, res) => {
     res.status(500).json({ mensaje: 'Error al obtener usuarios' });
   }
 };
+
+//ELIMINAR USUARIO
+export const eliminarUsuario = async (req, res) => {
+    const { id } = req.params;
+    try {
+      await prisma.usuario.delete({ where: { id: parseInt(id) } });
+      res.json({ mensaje: 'Usuario eliminado correctamente' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ mensaje: 'Error al eliminar usuario' });
+    }
+  };
+
+  // ACTUALIZAR USUARIO 
+  export const actualizarPerfil = async (req, res) => {
+    const { nombre, correo, contrasena } = req.body;
+    const { id } = req.usuario;
+  
+    try {
+      const data = { nombre, correo };
+      if (contrasena) {
+        data.contrasena = await bcrypt.hash(contrasena, 10);
+      }
+  
+      const usuarioActualizado = await prisma.usuario.update({
+        where: { id },
+        data,
+        select: { id: true, nombre: true, correo: true }
+      });
+  
+      res.json({ mensaje: 'Perfil actualizado', usuario: usuarioActualizado });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ mensaje: 'Error al actualizar perfil' });
+    }
+  };
+  
