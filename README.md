@@ -99,7 +99,7 @@ npm run dev
 | GET    | `/usuario/perfil`  | Obtener perfil del usuario autenticado |
 | GET    | `/user`            | Obtener todos los usuarios             |
 | DELETE | `/user/{id}`       | Eliminar un usuario                    |
-| PUT    | `/user/perfil`     | Actualizar perfil del usuario          |
+| PUT    | `/user/perfil/{id}`     | Actualizar perfil del usuario          |
 
 ### 🛒 Producto (solo admin)
 
