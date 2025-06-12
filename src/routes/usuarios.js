@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get('/', verificarToken, verificarAdmin, listarUsuarios);
 router.delete('/:id', verificarToken, verificarAdmin, eliminarUsuario);
-router.put('/perfil', verificarToken, actualizarPerfil);
+router.put('/perfil/:id', verificarToken, actualizarPerfil);
 
 export default router;

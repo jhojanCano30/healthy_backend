@@ -41,7 +41,10 @@ export const loginUsuario = async (req, res) => {
     if (!coincide) return res.status(401).json({ mensaje: 'Contraseña incorrecta' });
 
     const token = generarToken(usuario);
-    res.json({ usuario: { id: usuario.id, nombre: usuario.nombre, correo }, token });
+    res.json({
+  usuario: { id: usuario.id, nombre: usuario.nombre, correo: usuario.correo, rol: usuario.rol },
+  token
+});
   } catch (err) {
     console.error(err);
     res.status(500).json({ mensaje: 'Error en el login' });

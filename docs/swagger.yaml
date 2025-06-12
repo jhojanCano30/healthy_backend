@@ -118,7 +118,7 @@ paths:
         '401':
           description: No autorizado
 
-  /user/perfil:
+  /user/perfil/{id}:
     put:
       summary: Actualizar perfil de usuario
       description: Permite al usuario autenticado actualizar su perfil y/o contraseña.
